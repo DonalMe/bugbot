@@ -113,6 +113,9 @@ class UpliftBeta(BzCleaner):
             "summary": self.get_summary(bug),
             "regressions": bug["regressions"],
             "channels": channels,
+            # Same scope as `security_affected_versions`: any core-security
+            # group (e.g. core-security, firefox-core-security).
+            "is_sec": any("core-security" in group for group in bug["groups"]),
         }
 
         return bug
@@ -216,6 +219,7 @@ class UpliftBeta(BzCleaner):
                 self.extra_ni[bugid] = {
                     "regression": len(data["regressions"]),
                     "channels": data["channels"],
+                    "is_sec": data["is_sec"],
                 }
                 self.add_auto_ni(
                     bugid, {"mail": data["mail"], "nickname": data["nickname"]}

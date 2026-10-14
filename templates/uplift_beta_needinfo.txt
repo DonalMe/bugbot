@@ -1,3 +1,7 @@
+{% if extra[bugid]["is_sec"] -%}
+This is a security bug and must follow URL_placeholder.
+
+{% endif -%}
 The patch landed in nightly and {{ extra[bugid]["channels"][0] }} is affected{% if extra[bugid]["channels"] | length > 1 %}, along with ESR{% endif %}.
 
 :{{ nickname }}, {{ extra["question"] }} {{ extra[bugid]["channels"] | join(" and ") }}:
